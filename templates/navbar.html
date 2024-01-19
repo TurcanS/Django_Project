@@ -1,42 +1,43 @@
 {% load static %}
 
+<style>
+    .search-bar:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
     <div class="container">
-      <a class="navbar-brand" href="/"><img id="logo" src="{% static "images/logo/logo-small.png" %}" draggable="false" height="30" /></a>
-      <ul class="navbar-nav ms-3">
-        <li class="nav-item" style="width: 65px;">
-          <a class="nav-link d-flex align-items-center" href="{% url "register" %}"></a>
-        </li>
-      </ul>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-flex align-items-center w-100 form-search">
-          <div class="input-group">
-            <form class="search-bar" method="GET" action="{% url 'home' %}">
-                <input class="form-control me-2 search-bar text-bg-primary bg-dark" type="text" name="q" placeholder="Search Rooms...."/>
+        <a class="navbar-brand" href="/"><img id="logo" src="{% static "images/logo/logo-small.png" %}" draggable="false" height="30" /></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex align-items-center w-100 form-search search-bar" method="GET" action="{% url 'home' %}">
+                <input class="form-control me-2 search-bar text-bg-primary bg-dark text-white rounded-pill" type="search" name="q" placeholder="Search Rooms...." aria-label="Search" style="background-color: #555; border: none;"/>
             </form>
-          </div>
-        </form>
-        <ul class="navbar-nav ms-3">
-          {% if request.user.is_authenticated %}
-          <li class="nav-item" style="width: 35px;">
-            <a class="nav-link d-flex align-items-center" href="{% url "user-profile" user.id %}">{{user.username}}</a>
-          </li>
-          <li class="nav-item" style="width: 65px;">
-            <a class="nav-link d-flex align-items-center" href="{% url 'logout' %}">Logout</a>
-          </li>
-          {% else %}
-          <li class="nav-item" style="width: 65px;">
-            <a class="nav-link d-flex align-items-center" href="{% url "login" %}">Sign In</a>
-          </li>
-          {% endif %}
-          {% if request.user.is_authenticated %}
-          {% else %}
-          <li class="nav-item" style="width: 65px;">
-            <a class="nav-link d-flex align-items-center" href="{% url "register" %}">Register</a>
-          </li>
-          {% endif %}
-        </ul>
-      </div>
+            <ul class="navbar-nav ms-3">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item" style="width: 35px;">
+                        <a class="nav-link d-flex align-items-center" href="{% url "user-profile" user.id %}">{{user.username}}</a>
+                    </li>
+                    <li class="nav-item" style="width: 65px;">
+                        <a class="nav-link d-flex align-items-center" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item" style="width: 65px;">
+                        <a class="nav-link d-flex align-items-center" href="{% url "login" %}">Sign In</a>
+                    </li>
+                    <li class="nav-item" style="width: 65px;">
+                        <a class="nav-link d-flex align-items-center" href="{% url "register" %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </nav>
-<hr>
+<hr class="invisible-hr">
+
+<style>
+    .invisible-hr {
+        visibility: hidden;
+    }
+</style>
