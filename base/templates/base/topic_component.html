@@ -1,7 +1,7 @@
 <h3 class="py-2 my-2 text-light bg-dark rounded-pill">Browse Topic</h3>
 
 <div class="list-group" style="width: 200px;">
-    <a class="list-group-item list-group-item-action py-1 my-1 bg-custom text-light rounded-pill" href="{% url 'home' %}">ALL</a>
+    <a class="list-group-item list-group-item-action py-1 my-1 bg-custom text-light rounded-pill" href="{% url 'home' %}">All</a>
 
     {% for topic in topics %}
         <a class="list-group-item list-group-item-action py-1 my-1 bg-custom text-light rounded-pill" href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>

@@ -2,9 +2,10 @@
     {% for room in rooms %}
         <div class="card mb-3" style="background-color: #31363b; color: #f8f9fa;">
             <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'room' room.id %}" class="card-link" style="color: #f8f9fa;">{{room.name}}</a></h5>
                 <a href="{% url "user-profile" room.host.id %}" class="card-link" style="color: #f8f9fa;">@{{room.host.username}}</a>
-                <h5 class="card-title">{{room.id}} -- <a href="{% url 'room' room.id %}" class="card-link" style="color: #f8f9fa;">{{room.name}}</a></h5>
                 <p class="card-text"><small>{{room.topic.name}}</small></p>
+                <p style="position: absolute; top: 10px; right: 10px;"><small>{{room.created|timesince}}</small></p>
                 {% if request.user == room.host %}
                     <div style="position: absolute; bottom: 10px; right: 10px;">
                         <a href="{% url 'update-room' room.id %}" class="btn btn-light btn-sm">Edit</a>
