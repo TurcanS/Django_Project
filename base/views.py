@@ -70,11 +70,6 @@ def room(request, pk):
     room = Room.objects.get(id=pk)
     room_messages = room.message_set.all()
     participants = room.participants.all()
-    for room in room:
-        if datetime.now() - room.created > timedelta(days=7):
-            room.created = room.created.strftime("%B %d, %Y")
-        else:
-            room.created = timesince(room.created)
     if request.method == 'POST':
         message = Message.objects.create(
             user = request.user,
