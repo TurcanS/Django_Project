@@ -84,10 +84,11 @@ def room(request, pk):
 
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
+    username = f"@Deleted_User_{user.id}"
     rooms = user.room_set.all()
     room_messages = user.message_set.all()
     topics = Topic.objects.all()
-    context = {'user': user, 'rooms': rooms, 'room_messages': room_messages, 'topics': topics}
+    context = {'user': user, 'rooms': rooms, 'room_messages': room_messages, 'topics': topics, 'username': username}
     return render(request, 'base/profile.html', context)
 
 @login_required(login_url='login')
