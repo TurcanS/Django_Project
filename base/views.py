@@ -68,8 +68,15 @@ def home(request):
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
-    room_messages = room.message_set.all()
     participants = room.participants.all()
+    room_messages = Message.objects.filter(room=room).order_by('-created')
+    
+    if room_messages.count() > 8:
+        for message in room_messages[8:]:
+            message.delete()
+    
+    room_messages = room_messages[:8]
+    
     if request.method == 'POST':
         message = Message.objects.create(
             user = request.user,
